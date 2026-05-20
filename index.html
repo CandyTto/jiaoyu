@@ -10,33 +10,33 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: "Helvetica Neue", Helvetica, Arial, "Microsoft YaHei", sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Microsoft YaHei", sans-serif;
         }
 
         body {
-            background-color: #f8f9fa;
+            background-color: #f6f8fc;
             color: #333;
             line-height: 1.6;
         }
 
-        a {
-            text-decoration: none;
-            color: inherit;
-            cursor: pointer;
-        }
+        a { text-decoration: none; color: inherit; cursor: pointer; }
+        button, input, select { font-family: inherit; }
 
-        /* 核心颜色变量 */
         :root {
-            --primary-blue: #0A369D;   /* 严谨深蓝 */
-            --accent-gold: #D4AF37;    /* 荣耀质感金 */
-            --light-bg: #F4F7FC;       /* 浅色背景 */
-            --dark-text: #222222;
+            --primary-blue: #0A369D;
+            --accent-gold: #D4AF37;
+            --gold-hover: #b8952e;
+            --light-bg: #F4F7FC;
+            --dark-text: #1e293b;
+            --card-shadow: 0 10px 30px rgba(10, 54, 157, 0.05);
+            --modal-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
         }
 
         /* 1. 导航栏 */
         header {
-            background-color: #ffffff;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.03);
             position: sticky;
             top: 0;
             z-index: 1000;
@@ -48,277 +48,148 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 20px;
+            padding: 16px 20px;
         }
 
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-            color: var(--primary-blue);
-        }
+        .logo { font-size: 26px; font-weight: 800; color: var(--primary-blue); letter-spacing: 1px; }
+        .logo span { color: var(--accent-gold); }
 
-        .logo span {
-            color: var(--accent-gold);
-        }
-
-        .nav-menu {
-            display: flex;
-            list-style: none;
-            gap: 30px;
-        }
-
-        .nav-menu a {
-            font-size: 16px;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-
-        .nav-menu a:hover, .nav-menu a.active {
-            color: var(--primary-blue);
-            border-bottom: 2px solid var(--primary-blue);
-            padding-bottom: 5px;
-        }
+        .nav-menu { display: flex; list-style: none; gap: 35px; }
+        .nav-menu a { font-size: 16px; font-weight: 600; color: #475569; transition: all 0.3s; }
+        .nav-menu a:hover, .nav-menu a.active { color: var(--primary-blue); }
 
         .nav-btn {
-            background-color: var(--accent-gold);
-            color: white;
-            padding: 8px 20px;
-            border-radius: 20px;
-            font-weight: bold;
-            border: none;
-            cursor: pointer;
-            transition: background 0.3s;
+            background: linear-gradient(135deg, var(--accent-gold) 0%, #C5A028 100%);
+            color: white; padding: 10px 24px; border-radius: 30px;
+            font-weight: bold; border: none; cursor: pointer;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3); transition: all 0.3s;
         }
+        .nav-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4); }
 
-        .nav-btn:hover { background-color: #b8952e; }
-
-        /* 2. Banner 巨幕区 */
+        /* 2. Banner 区 */
         .hero-banner {
-            background: linear-gradient(135deg, #0A369D 0%, #051B4F 100%);
-            color: white;
-            padding: 100px 20px;
-            text-align: center;
+            background: linear-gradient(135deg, #0A369D 0%, #031236 100%);
+            color: white; padding: 110px 20px; text-align: center;
         }
 
-        .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
+        .hero-content { max-width: 850px; margin: 0 auto; }
+        .hero-content h1 { font-size: 46px; margin-bottom: 24px; font-weight: 800; letter-spacing: 2px; }
+        .hero-content h1 span { color: var(--accent-gold); text-shadow: 0 2px 10px rgba(214,175,55,0.2); }
+        .hero-content p { font-size: 20px; opacity: 0.85; margin-bottom: 45px; font-weight: 300; }
 
-        .hero-content h1 {
-            font-size: 42px;
-            margin-bottom: 20px;
-            letter-spacing: 2px;
-        }
+        .cta-buttons { display: flex; justify-content: center; gap: 24px; }
+        .btn-primary, .btn-secondary { padding: 16px 38px; font-size: 18px; font-weight: 700; border-radius: 8px; border: none; cursor: pointer; transition: all 0.3s; }
+        .btn-primary { background: linear-gradient(135deg, var(--accent-gold) 0%, #B8952E 100%); color: white; box-shadow: 0 5px 20px rgba(214,175,55,0.3); }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(214,175,55,0.4); }
+        .btn-secondary { border: 2px solid rgba(255,255,255,0.7); background: transparent; color: white; }
+        .btn-secondary:hover { background: rgba(255,255,255,0.1); border-color: white; transform: translateY(-3px); }
 
-        .hero-content h1 span { color: var(--accent-gold); }
+        /* 通用布局 */
+        .section-container { max-width: 1200px; margin: 0 auto; padding: 80px 20px; }
+        .section-title { text-align: center; margin-bottom: 50px; }
+        .section-title h2 { font-size: 34px; color: var(--primary-blue); font-weight: 800; position: relative; display: inline-block; padding-bottom: 16px; }
+        .section-title h2::after { content: ''; width: 50px; height: 4px; background-color: var(--accent-gold); position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); border-radius: 2px; }
 
-        .hero-content p {
-            font-size: 20px;
-            opacity: 0.9;
-            margin-bottom: 40px;
-        }
+        /* 3. 稳固型超大公告系统 */
+        .notice-tabs { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-bottom: 35px; }
+        .tab-btn { padding: 12px 24px; background: white; border: 1px solid #e2e8f0; border-radius: 6px; cursor: pointer; font-weight: 700; color: #64748b; transition: all 0.3s; }
+        .tab-btn.active, .tab-btn:hover { background-color: var(--primary-blue); color: white; border-color: var(--primary-blue); box-shadow: 0 5px 15px rgba(10,54,157,0.15); }
 
-        .cta-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
+        .notice-container { background: white; border-radius: 12px; box-shadow: var(--card-shadow); padding: 10px 25px; }
+        .notice-list { display: none; }
+        .notice-list.active { display: block; }
 
-        .btn-primary, .btn-secondary {
-            padding: 15px 35px;
-            font-size: 18px;
-            font-weight: bold;
-            border-radius: 5px;
-            border: none;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
+        .notice-group { border-bottom: 1px solid #f1f5f9; padding: 20px 0; }
+        .notice-group:last-child { border-bottom: none; }
+        
+        .notice-header { display: flex; justify-content: space-between; align-items: center; cursor: pointer; gap: 15px; }
+        .notice-header:hover { opacity: 0.85; }
+        
+        .notice-left { display: flex; align-items: center; gap: 15px; width: 85%; }
+        .notice-tag { background: #eff6ff; color: var(--primary-blue); padding: 4px 10px; font-size: 13px; font-weight: 700; border-radius: 4px; white-space: nowrap; }
+        .notice-tag.b { background: #f0fdf4; color: #16a34a; }
+        .notice-tag.c { background: #fff7ed; color: #ea580c; }
+        .notice-tag.d { background: #f5f3ff; color: #7c3aed; }
+        .notice-tag.e { background: #fef2f2; color: #dc2626; }
+        
+        .notice-title-text { font-size: 16px; font-weight: 600; color: var(--dark-text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        
+        .notice-right { display: flex; align-items: center; gap: 15px; color: #94a3b8; font-size: 14px; white-space: nowrap; }
+        .arrow-icon { font-size: 12px; transition: transform 0.3s; }
+        .notice-group.open .arrow-icon { transform: rotate(180deg); color: var(--accent-gold); }
 
-        .btn-primary { background-color: var(--accent-gold); color: white; }
-        .btn-secondary { border: 2px solid white; background: transparent; color: white; }
-        .btn-primary:hover { transform: translateY(-3px); }
-        .btn-secondary:hover { background: rgba(255,255,255,0.1); }
+        .notice-body { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background-color: #f8fafc; border-radius: 8px; }
+        .notice-group.open .notice-body { max-height: 1000px; padding: 24px; border-left: 4px solid var(--accent-gold); margin-top: 15px; }
+        
+        .info-table { width: 100%; border-collapse: collapse; margin-bottom: 15px; font-size: 14px; background: white; }
+        .info-table th, .info-table td { border: 1px solid #e2e8f0; padding: 12px 16px; text-align: left; }
+        .info-table th { background-color: #f1f5f9; color: #334155; font-weight: 700; width: 25%; }
+        .detail-p { font-size: 14px; color: #475569; line-height: 1.7; margin-bottom: 15px; }
+        .action-inline-btn { background: var(--primary-blue); color: white; border: none; padding: 8px 18px; border-radius: 4px; font-weight: 600; cursor: pointer; font-size: 13px; }
+        .action-inline-btn:hover { background: #082b7d; }
 
-        /* 通用页面区块 */
-        .section-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 60px 20px;
-        }
+        /* 4. 精品课程 */
+        .course-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 30px; }
+        .course-card { background: white; border-radius: 12px; box-shadow: var(--card-shadow); overflow: hidden; transition: all 0.3s; border-top: 5px solid transparent; display: flex; flex-direction: column; justify-content: space-between; }
+        .course-card:hover { transform: translateY(-5px); border-top-color: var(--accent-gold); box-shadow: 0 15px 35px rgba(10,54,157,0.1); }
+        .course-card-body { padding: 30px; }
+        .course-card .course-tag { background-color: var(--light-bg); color: var(--primary-blue); display: inline-block; padding: 4px 12px; font-size: 13px; font-weight: 700; margin-bottom: 16px; border-radius: 4px; }
+        .course-card h3 { font-size: 22px; color: var(--dark-text); margin-bottom: 14px; font-weight: 800; }
+        
+        .course-desc-list { list-style: none; margin-bottom: 10px; }
+        .course-desc-list li { font-size: 14px; color: #475569; margin-bottom: 8px; display: flex; align-items: flex-start; gap: 8px; }
+        .course-desc-list li::before { content: "✓"; color: var(--accent-gold); font-weight: bold; }
 
-        .section-title {
-            text-align: center;
-            margin-bottom: 40px;
-        }
+        .course-footer { padding: 20px 30px; display: flex; justify-content: space-between; align-items: center; background-color: #fafafa; border-top: 1px solid #f1f5f9; }
+        .price { color: #dc2626; font-size: 22px; font-weight: 800; }
+        .apply-btn { color: var(--primary-blue); font-weight: 700; font-size: 15px; background: none; border: none; cursor: pointer; }
 
-        .section-title h2 {
-            font-size: 32px;
-            color: var(--primary-blue);
-            position: relative;
-            display: inline-block;
-            padding-bottom: 15px;
-        }
-
-        .section-title h2::after {
-            content: '';
-            width: 60px;
-            height: 3px;
-            background-color: var(--accent-gold);
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        /* 3. 新增功能：考试公告资讯 Tab 切换 */
-        .notice-tabs {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 30px;
-        }
-
-        .tab-btn {
-            padding: 10px 25px;
-            background: #fff;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: all 0.3s;
-        }
-
-        .tab-btn.active, .tab-btn:hover {
-            background-color: var(--primary-blue);
-            color: white;
-            border-color: var(--primary-blue);
-        }
-
-        .notice-content {
-            display: none;
-            background: white;
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-        }
-
-        .notice-content.active { display: block; }
-
-        .notice-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 15px 0;
-            border-bottom: 1px solid #eee;
-        }
-
-        .notice-item:last-child { border-bottom: none; }
-
-        .notice-tag {
-            background: #e6f0ff;
-            color: var(--primary-blue);
-            padding: 2px 8px;
-            font-size: 12px;
-            border-radius: 3px;
-            margin-right: 10px;
-        }
-
-        .notice-date { color: #999; font-size: 14px; }
-
-        /* 4. 核心精品课程 */
-        .course-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-        }
-
-        .course-card {
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            overflow: hidden;
-            transition: all 0.3s;
-            border-top: 4px solid transparent;
-        }
-
-        .course-card:hover {
-            transform: translateY(-5px);
-            border-top-color: var(--accent-gold);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-        }
-
-        .course-tag {
-            background-color: var(--light-bg);
-            color: var(--primary-blue);
-            display: inline-block;
-            padding: 4px 12px;
-            font-size: 12px;
-            font-weight: bold;
-            margin: 20px 20px 10px 20px;
-            border-radius: 4px;
-        }
-
-        .course-card h3 { padding: 0 20px 10px 20px; font-size: 20px; color: var(--dark-text); }
-        .course-card p { padding: 0 20px 25px 20px; color: #666; font-size: 14px; border-bottom: 1px solid #eee; }
-        .course-footer { padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; background-color: #fafafa; }
-        .price { color: #e4393c; font-size: 18px; font-weight: bold; }
-        .apply-btn { color: var(--primary-blue); font-weight: bold; font-size: 14px; background: none; border: none; cursor: pointer; }
-
-        /* 5. 弹窗功能 (Modal) */
+        /* 5. 极致精美弹窗 UI */
         .modal-overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.6);
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(15, 23, 42, 0.4); backdrop-filter: blur(8px);
             display: flex; justify-content: center; align-items: center;
             z-index: 2000; opacity: 0; pointer-events: none;
-            transition: opacity 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
-
         .modal-overlay.active { opacity: 1; pointer-events: auto; }
-
         .modal-box {
-            background: white; padding: 30px; border-radius: 8px;
-            width: 90%; max-width: 400px; position: relative;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            background: white; padding: 40px; border-radius: 16px;
+            width: 92%; max-width: 440px; position: relative;
+            box-shadow: var(--modal-shadow); transform: scale(0.9) translateY(20px);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
-
+        .modal-overlay.active .modal-box { transform: scale(1) translateY(0); }
         .close-modal {
-            position: absolute; top: 15px; right: 15px;
-            font-size: 24px; color: #999; cursor: pointer;
+            position: absolute; top: 20px; right: 20px; width: 32px; height: 32px;
+            background: #f1f5f9; border-radius: 50%; display: flex; justify-content: center;
+            align-items: center; font-size: 20px; color: #64748b; cursor: pointer; transition: all 0.2s;
         }
+        .close-modal:hover { background: #e2e8f0; color: #1e293b; transform: rotate(90deg); }
 
-        .modal-box h3 { color: var(--primary-blue); margin-bottom: 15px; text-align: center; }
-
-        .form-group { margin-bottom: 15px; }
-        .form-group label { display: block; margin-bottom: 5px; font-size: 14px; font-weight: bold; }
+        .modal-box h3 { color: var(--primary-blue); font-size: 23px; font-weight: 800; margin-bottom: 8px; text-align: center; }
+        .modal-subtitle { text-align: center; color: #64748b; font-size: 13px; margin-bottom: 24px; }
+        .form-group { margin-bottom: 18px; }
+        .form-group label { display: block; margin-bottom: 6px; font-size: 14px; font-weight: 700; color: #334155; }
         .form-group input, .form-group select {
-            width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 14px;
+            width: 100%; padding: 11px 14px; border: 1px solid #cbd5e1; border-radius: 8px;
+            font-size: 14px; color: var(--dark-text); background-color: #f8fafc; transition: all 0.2s;
         }
-
+        .form-group input:focus, .form-group select:focus { outline: none; border-color: var(--primary-blue); background-color: white; box-shadow: 0 0 0 4px rgba(10, 54, 157, 0.1); }
         .submit-btn {
-            width: 100%; padding: 12px; background: var(--primary-blue);
-            color: white; border: none; border-radius: 4px; font-weight: bold;
-            cursor: pointer; font-size: 16px; margin-top: 10px;
+            width: 100%; padding: 14px; background: linear-gradient(135deg, var(--primary-blue) 0%, #082b7d 100%);
+            color: white; border: none; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 16px; margin-top: 10px;
         }
-        .submit-btn:hover { background: #082b7d; }
+        .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(10, 54, 157, 0.25); }
 
-        /* 6. 右下角悬浮客服面板 */
-        .floating-contact {
-            position: fixed; bottom: 30px; right: 30px; z-index: 999;
-            display: flex; flex-direction: column; gap: 10px;
-        }
+        /* 6. 右下角悬浮 */
+        .floating-contact { position: fixed; bottom: 40px; right: 40px; z-index: 999; display: flex; flex-direction: column; gap: 14px; }
+        .contact-circle { width: 56px; height: 56px; background: white; color: #475569; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 22px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); cursor: pointer; transition: all 0.3s; }
+        .contact-circle.c-main { background: var(--accent-gold); color: white; }
+        .contact-circle:hover { transform: translateY(-3px); }
 
-        .contact-circle {
-            width: 55px; height: 55px; background: var(--accent-gold);
-            color: white; border-radius: 50%; display: flex;
-            justify-content: center; align-items: center; font-size: 24px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15); cursor: pointer;
-            transition: all 0.3s;
-        }
-        .contact-circle:hover { transform: scale(1.05); background: var(--primary-blue); }
-
-        /* 页脚 */
-        footer { background-color: #1a1a1a; color: #999; padding: 40px 20px; font-size: 14px; text-align: center; border-top: 3px solid var(--accent-gold); }
+        footer { background-color: #0f172a; color: #64748b; padding: 40px 20px; font-size: 14px; text-align: center; border-top: 4px solid var(--accent-gold); }
+        @media(max-width: 768px) { .nav-menu { display: none; } .hero-content h1 { font-size: 32px; } }
     </style>
 </head>
 <body>
@@ -328,70 +199,299 @@
             <div class="logo">星斐淇<span>教育</span></div>
             <ul class="nav-menu">
                 <li><a href="#" class="active">网站首页</a></li>
-                <li><a href="#notices">考试资讯</a></li>
-                <li><a href="#courses">精品课程</a></li>
-                <li><a href="#" onclick="openModal('报考指导咨询')">在职考编评估</a></li>
+                <li><a href="#notices">A B C D E类公告</a></li>
+                <li><a href="#courses">专属精品课</a></li>
             </ul>
-            <button class="nav-btn" onclick="openModal('导航栏在线咨询')">在线咨询</button>
+            <button class="nav-btn" onclick="openModal('预约在职备考1对1评估')">在线咨询</button>
         </div>
     </header>
 
     <section class="hero-banner">
         <div class="hero-content">
             <h1>“星”光不问赶路人，助你一战成<span>“编”</span></h1>
-            <p>2026年事业单位统考（A/B/C/E类）系统进阶班，名师带队精准击破</p>
+            <p>2025-2026年全国事业单位统考ABCDE多类全景通关方案，名师定制专属督学</p>
             <div class="cta-buttons">
-                <button class="btn-primary" onclick="openModal('领取历年真题资料')">免费领取历年真题</button>
-                <button class="btn-secondary" onclick="openModal('1对1报考指导')">1对1报考条件自测</button>
+                <button class="btn-primary" onclick="openModal('申领：2025-2026全类真题重难点')">免费领取历年真题</button>
+                <button class="btn-secondary" onclick="openModal('自测：2026事业单位资格自查')">1对1报考条件自测</button>
             </div>
         </div>
     </section>
 
     <section id="notices" class="section-container">
         <div class="section-title">
-            <h2>最新招聘公告资讯</h2>
+            <h2>最新事业单位招聘公告（近两年真实情境）</h2>
         </div>
         <div class="notice-tabs">
-            <button class="tab-btn active" onclick="switchTab(event, 'tab-all')">全部公告</button>
-            <button class="tab-btn" onclick="switchTab(event, 'tab-medical')">医疗卫生(E类)</button>
-            <button class="tab-btn" onclick="switchTab(event, 'tab-zh')">综合管理(A类)</button>
+            <button class="tab-btn active" onclick="switchTab(event, 'cat-a')">综合管理类 (A类)</button>
+            <button class="tab-btn" onclick="switchTab(event, 'cat-b')">社会科学专技类 (B类)</button>
+            <button class="tab-btn" onclick="switchTab(event, 'cat-c')">自然科学专技类 (C类)</button>
+            <button class="tab-btn" onclick="switchTab(event, 'cat-d')">中小学教师类 (D类)</button>
+            <button class="tab-btn" onclick="switchTab(event, 'cat-e')">医疗卫生类 (E类)</button>
         </div>
 
-        <div id="tab-all" class="notice-content active">
-            <div class="notice-item">
-                <div><span class="notice-tag">医疗岗</span>2026年昆明市事业单位医疗卫生岗统考公告及职位表发布</div>
-                <div class="notice-date">05-19</div>
+        <div class="notice-container">
+            
+            <div id="cat-a" class="notice-list active">
+                <div class="notice-group">
+                    <div class="notice-header" onclick="toggleNotice(this)">
+                        <div class="notice-left"><span class="notice-tag">A类</span><span class="notice-title-text">2026年北京市属事业单位上半年面向社会公开招聘工作人员简章</span></div>
+                        <div class="notice-right"><span>2026-05-15</span><span class="arrow-icon">▼</span></div>
+                    </div>
+                    <div class="notice-body">
+                        <table class="info-table">
+                            <tr><th>招录单位</th><td>市级机关下属中心、各区直单位行政后勤岗</td></tr>
+                            <tr><th>学历户籍</th><td>本科及以上，部分重点岗位限北京本地户口</td></tr>
+                            <tr><th>笔试科目</th><td>职业能力倾向测验(A类) + 综合应用能力(A类)</td></tr>
+                        </table>
+                        <p class="detail-p">侧重于行政管理、公文写作、规划协调能力。北京属A类竞争较为激烈，考察形式灵活，需尽早攻克材料大作文关卡。</p>
+                        <button class="action-inline-btn" onclick="openModal('获取北京A类职位检索表')">一键检索该公告岗位表</button>
+                    </div>
+                </div>
+                <div class="notice-group">
+                    <div class="notice-header" onclick="toggleNotice(this)">
+                        <div class="notice-left"><span class="notice-tag">A类</span><span class="notice-title-text">2026年昆明市五华区/盘龙区事业单位公开选拔管理岗职员通知</span></div>
+                        <div class="notice-right"><span>2026-05-04</span><span class="arrow-icon">▼</span></div>
+                    </div>
+                    <div class="notice-body">
+                        <table class="info-table">
+                            <tr><th>招录单位</th><td>街道办事处、区属街道综合执法大队等基础管理中队</td></tr>
+                            <tr><th>学历户籍</th><td>大专及以上可报，不限户籍，开设部分在职社会人员通道</td></tr>
+                            <tr><th>笔试科目</th><td>公共基础知识 + 行政职业能力测验</td></tr>
+                        </table>
+                        <p class="detail-p">基层综合管理岗位，主要考察涉农、社区治理等综合处置突发事件的实务操作能力。</p>
+                        <button class="action-inline-btn" onclick="openModal('获取昆明A类历年分线')">索取历年入面分数线分析</button>
+                    </div>
+                </div>
+                <div class="notice-group">
+                    <div class="notice-header" onclick="toggleNotice(this)">
+                        <div class="notice-left"><span class="notice-tag">A类</span><span class="notice-title-text">2026年上半年云南省事业单位集中统考（A类综合管理）补充录用公告</span></div>
+                        <div class="notice-right"><span>2026-04-20</span><span class="arrow-icon">▼</span></div>
+                    </div>
+                    <div class="notice-body">
+                        <table class="info-table">
+                            <tr><th>招录单位</th><td>省属、昆明市属各单位管理中层预备岗</td></tr>
+                            <tr><th>学历户籍</th><td>全日制本科以上，无特定户籍限制</td></tr>
+                            <tr><th>笔试科目</th><td>综合应用能力A类 + 面试结构化</td></tr>
+                        </table>
+                        <p class="detail-p">属于高分进面补录通道，竞争极度白热化，数据表明最终录取分数线较往年整体上浮约5分。</p>
+                        <button class="action-inline-btn" onclick="openModal('咨询云南A类补录表')">一键检索补录岗位表</button>
+                    </div>
+                </div>
+                <div class="notice-group">
+                    <div class="notice-header" onclick="toggleNotice(this)">
+                        <div class="notice-left"><span class="notice-tag">A类</span><span class="notice-title-text">2026年上海市事业单位公开招聘集中岗位（管理岗）招录公告</span></div>
+                        <div class="notice-right"><span>2026-03-11</span><span class="arrow-icon">▼</span></div>
+                    </div>
+                    <div class="notice-body">
+                        <table class="info-table">
+                            <tr><th>招录单位</th><td>各区属社会保障中心、各街道社区事务受理服务中心</td></tr>
+                            <tr><th>学历户籍</th><td>本科及以上学历，部分紧缺管理序列不限户籍</td></tr>
+                            <tr><th>笔试科目</th><td>基本素质能力测验（相当于公基与职测融合卷）</td></tr>
+                        </table>
+                        <p class="detail-p">全面考察政治理论素养与综合分析、日常事务处理能力，对在职考生复习的知识框架完整度要求高。</p>
+                        <button class="action-inline-btn" onclick="openModal('获取上海管理岗大纲')">索取备考核心大纲</button>
+                    </div>
+                </div>
+                <div class="notice-group">
+                    <div class="notice-header" onclick="toggleNotice(this)">
+                        <div class="notice-left"><span class="notice-tag">A类</span><span class="notice-title-text">2026年国家税务总局系统部分事业单位公开招聘（北京考区）公告</span></div>
+                        <div class="notice-right"><span>2026-02-28</span><span class="arrow-icon">▼</span></div>
+                    </div>
+                    <div class="notice-body">
+                        <table class="info-table">
+                            <tr><th>招录单位</th><td>税务系统下属数据资产中心、后勤综合保障中心</td></tr>
+                            <tr><th>学历户籍</th><td>硕士研究生优先，本科生限特定管理与法学类专业</td></tr>
+                            <tr><th>笔试科目</th><td>职测A类 + 申论/专业公文写作</td></tr>
+                        </table>
+                        <p class="detail-p">中央部委直属标签岗位，薪酬福利丰厚。考核深度以及论述范围远超地方常规普通事业编。</p>
+                        <button class="action-inline-btn" onclick="openModal('咨询税务编制详情')">获取该公告完整岗位表</button>
+                    </div>
+                </div>
+                <div class="notice-group">
+                    <div class="notice-header" onclick="toggleNotice(this)">
+                        <div class="notice-left"><span class="notice-tag">A类</span><span class="notice-title-text">2025年下半年北京市各区事业单位集中联考（综合管理类）职位表</span></div>
+                        <div class="notice-right"><span>2025-10-18</span><span class="arrow-icon">▼</span></div>
+                    </div>
+                    <div class="notice-body">
+                        <table class="info-table">
+                            <tr><th>招录单位</th><td>朝阳、海淀、丰台各街镇保障服务中心及科协、残联等</td></tr>
+                            <tr><th>学历户籍</th><td>大专/本科分层招录，部分管理岗要求2年以上社会工作经验</td></tr>
+                            <tr><th>笔试科目</th><td>公共基础知识 + 职业能力倾向测验 + 基础材料分析</td></tr>
+                        </table>
+                        <p class="detail-p">主要面向在职社会人员，考试内容高度契合实际行政工作效率与政策落地执行流程。</p>
+                        <button class="action-inline-btn" onclick="openModal('检索2025北京历年题')">一键检索历年分数线</button>
+                    </div>
+                </div>
+                <div class="notice-group">
+                    <div class="notice-header" onclick="toggleNotice(this)">
+                        <div class="notice-left"><span class="notice-tag">A类</span><span class="notice-title-text">2025年云南省事业单位大中专毕业生专项招聘（A类岗位）简章</span></div>
+                        <div class="notice-right"><span>2025-09-05</span><span class="arrow-icon">▼</span></div>
+                    </div>
+                    <div class="notice-body">
+                        <table class="info-table">
+                            <tr><th>招录单位</th><td>昆明、曲靖、红河等州市直属单位综合办公室</td></tr>
+                            <tr><th>学历户籍</th><td>限大中专优秀应届毕业生、退役军人或“三支一扶”期满人员</td></tr>
+                            <tr><th>笔试科目</th><td>职业能力倾向测验(A类) + 职业适应性测试</td></tr>
+                        </table>
+                        <p class="detail-p">属于政策倾斜型优质岗位，入职后直接办理落户并录入事业编制管理，报考门槛相对亲民。</p>
+                        <button class="action-inline-btn" onclick="openModal('检索云南专项表')">一键检索该公告岗位表</button>
+                    </div>
+                </div>
+                <div class="notice-group">
+                    <div class="notice-header" onclick="toggleNotice(this)">
+                        <div class="notice-left"><span class="notice-tag">A类</span><span class="notice-title-text">2025年广州市属事业单位面向社会公开招聘（管理岗）简章</span></div>
+                        <div class="notice-right"><span>2025-05-22</span><span class="arrow-icon">▼</span></div>
+                    </div>
+                    <div class="notice-body">
+                        <table class="info-table">
+                            <tr><th>招录单位</th><td>市直管委会、市政综合事务中心、产业园区管委会等</td></tr>
+                            <tr><th>学历户籍</th><td>本科及以上学历，要求具有中级以上专业职称优先</td></tr>
+                            <tr><th>笔试科目</th><td>综合能力测试 + 结构化面试</td></tr>
+                        </table>
+                        <p class="detail-p">沿海高薪地区待遇梯队，题目难度极大，其中逻辑推理与资料分析板块分值占比较高。</p>
+                        <button class="action-inline-btn" onclick="openModal('广州管理岗薪资自查')">获取完整岗位表</button>
+                    </div>
+                </div>
+                <div class="notice-group">
+                    <div class="notice-header" onclick="toggleNotice(this)">
+                        <div class="notice-left"><span class="notice-tag">A类</span><span class="notice-title-text">2025年上半年四川省属事业单位公开招聘（综合管理A类）公告</span></div>
+                        <div class="notice-right"><span>2025-04-12</span><span class="arrow-icon">▼</span></div>
+                    </div>
+                    <div class="notice-body">
+                        <table class="info-table">
+                            <tr><th>招录单位</th><td>省发改委、省民政厅、省统计局直属参公/全额事业单</td></tr>
+                            <tr><th>学历户籍</th><td>硕士研究生或优秀应往届本科生，不限生源户籍</td></tr>
+                            <tr><th>笔试科目</th><td>综合知识 (含大量法律基础、经济学理论与公文规范)</td></tr>
+                        </table>
+                        <p class="detail-p">考查范围宏大，涉及最新时政动态、基础法学、行政行为能力判定等，需要系统筑基复习。</p>
+                        <button class="action-inline-btn" onclick="openModal('获取四川A类真题')">一键检索该公告岗位表</button>
+                    </div>
+                </div>
+                <div class="notice-group">
+                    <div class="notice-header" onclick="toggleNotice(this)">
+                        <div class="notice-left"><span class="notice-tag">A类</span><span class="notice-title-text">2025年杭州市各级事业单位统一招聘（综合管理类）简章</span></div>
+                        <div class="notice-right"><span>2025-03-29</span><span class="arrow-icon">▼</span></div>
+                    </div>
+                    <div class="notice-body">
+                        <table class="info-table">
+                            <tr><th>招录单位</th><td>西湖区、滨江区街道党群服务中心，区属国资事务局</td></tr>
+                            <tr><th>学历户籍</th><td>本科及以上，部分一线保障岗位限制随军家属报考</td></tr>
+                            <tr><th>笔试科目</th><td>综合素质测试大综合</td></tr>
+                        </table>
+                        <p class="detail-p">竞争极端火爆，面试环节增加无领导小组讨论，对社会在职人员的口头表达与抗压心理考核更严。</p>
+                        <button class="action-inline-btn" onclick="openModal('杭州无领导资料')">获取杭州A类完整岗位表</button>
+                    </div>
+                </div>
             </div>
-            <div class="notice-item">
-                <div><span class="notice-tag">综合岗</span>2026年北京市属事业单位上半年公招统考笔试大纲</div>
-                <div class="notice-date">05-15</div>
-            </div>
-            <div class="notice-item">
-                <div><span class="notice-tag">三支一扶</span>2026年高校毕业生“三支一扶”计划招募简章</div>
-                <div class="notice-date">05-10</div>
-            </div>
-        </div>
 
-        <div id="tab-medical" class="notice-content">
-            <div class="notice-item">
-                <div><span class="notice-tag">医疗岗</span>2026年昆明市事业单位医疗卫生岗统考公告及职位表发布</div>
-                <div class="notice-date">05-19</div>
+            <div id="cat-b" class="notice-list">
+                <div class="notice-group">
+                    <div class="notice-header" onclick="toggleNotice(this)">
+                        <div class="notice-left"><span class="notice-tag b">B类</span><span class="notice-title-text">2026年北京市各区文化馆、图书馆及融媒体中心招聘简章</span></div>
+                        <div class="notice-right"><span>2026-05-10</span><span class="arrow-icon">▼</span></div>
+                    </div>
+                    <div class="notice-body">
+                        <table class="info-table">
+                            <tr><th>招录单位</th><td>各区文旅局下属文体中心、融媒体采编运营部</td></tr>
+                            <tr><th>专业要求</th><td>新闻学、汉语言文学、艺术设计、网络与新媒体等</td></tr>
+                            <tr><th>笔试科目</th><td>职业能力倾向测验(B类) + 综合应用能力(B类)</td></tr>
+                        </table>
+                        <p class="detail-p">主要考察文字信息校对、社会活动策划、媒体综述撰写以及对热点社会现象的论述能力。</p>
+                        <button class="action-inline-btn" onclick="openModal('咨询北京B类编制')">一键检索该公告岗位表</button>
+                    </div>
+                </div>
+                <div class="notice-group"><div class="notice-header" onclick="toggleNotice(this)"><div class="notice-left"><span class="notice-tag b">B类</span><span class="notice-title-text">2026年云南省档案馆、省社科院面向社会公开招聘专技人员公告</span></div><div class="notice-right"><span>2026-04-18</span><span class="arrow-icon">▼</span></div></div><div class="notice-body"><p class="detail-p">主要招录历史、哲学、社会学硕士研究生。侧重考核文献整理、社会调查报告拟定以及现场技能实操答辩。</p><button class="action-inline-btn" onclick="openModal('咨询')">检索岗位表及专属讲义</button></div></div>
+                <div class="notice-group"><div class="notice-header" onclick="toggleNotice(this)"><div class="notice-left"><span class="notice-tag b">B类</span><span class="notice-title-text">2026年天津市教委直属高校非教学科研辅助岗（B类）招聘启事</span></div><div class="notice-right"><span>2026-03-22</span><span class="arrow-icon">▼</span></div></div><div class="notice-body"><p class="detail-p">招录各大高校网络管理中心、学生综合事务中心等文职序列专技岗。倾向考核公文写作及突发事务应变沟通。</p><button class="action-inline-btn" onclick="openModal('咨询')">检索岗位表及专属讲义</button></div></div>
+                <div class="notice-group"><div class="notice-header" onclick="toggleNotice(this)"><div class="notice-left"><span class="notice-tag b">B类</span><span class="notice-title-text">2026年成都市社会科学院及市地方志编纂委员会面向社会公开招聘简章</span></div><div class="notice-right"><span>2026-02-14</span><span class="arrow-icon">▼</span></div></div><div class="notice-body"><p class="detail-p">考察内容包含海量文字编纂常识与宏观经济社科分析题，写作题量极其浩大。</p><button class="action-inline-btn" onclick="openModal('咨询')">检索岗位表及专属讲义</button></div></div>
+                <div class="notice-group"><div class="notice-header" onclick="toggleNotice(this)"><div class="notice-left"><span class="notice-tag b">B类</span><span class="notice-title-text">2026年国家图书馆、各部委期刊社编内社会科学岗集中选拔大纲</span></div><div class="notice-right"><span>2026-01-05</span><span class="arrow-icon">▼</span></div></div><div class="notice-body"><p class="detail-p">属于国家级出版专技编制，福利健全稳定。笔试考核包含版权法、图书情报编目基础及综合材料整合。</p><button class="action-inline-btn" onclick="openModal('咨询')">检索岗位表及专属讲义</button></div></div>
+                <div class="notice-group"><div class="notice-header" onclick="toggleNotice(this)"><div class="notice-left"><span class="notice-tag b">B类</span><span class="notice-title-text">2025年下半年浙江省直属事业单位文体传媒类岗位公招职位表</span></div><div class="notice-right"><span>2025-11-05</span><span class="arrow-icon">▼</span></div></div><div class="notice-body"><p class="detail-p">省博物馆、省美术馆专技岗。理论笔试占比40%，现场艺术鉴赏/文博陈列设计技能加试占比60%。</p><button class="action-inline-btn" onclick="openModal('咨询')">检索岗位表及专属讲义</button></div></div>
+                <div class="notice-group"><div class="notice-header" onclick="toggleNotice(this)"><div class="notice-left"><span class="notice-tag b">B类</span><span class="notice-title-text">2025年西安市属文博系统公开招聘急需紧缺社科专技人才公告</span></div><div class="notice-right"><span>2025-09-20</span><span class="arrow-icon">▼</span></div></div><div class="notice-body"><p class="detail-p">兵马俑博物馆、市文物保护考古研究院招录。部分特定冷门社科专业可免笔试，星斐淇提供精准面试方案。</p><button class="action-inline-btn" onclick="openModal('咨询')">检索岗位表及专属讲义</button></div></div>
+                <div class="notice-group"><div class="notice-header" onclick="toggleNotice(this)"><div class="notice-left"><span class="notice-tag b">B类</span><span class="notice-title-text">2025年南京市各级公共图书馆、群艺馆事业编制集中招聘启事</span></div><div class="notice-right"><span>2025-06-15</span><span class="arrow-icon">▼</span></div></div><div class="notice-body"><p class="detail-p">招录图书情报学、档案学专业本科。题型含大量基础文史常识客观题、复杂文献索引综述题。</p><button class="action-inline-btn" onclick="openModal('咨询')">检索岗位表及专属讲义</button></div></div>
+                <div class="notice-group"><div class="notice-header" onclick="toggleNotice(this)"><div class="notice-left"><span class="notice-tag b">B类</span><span class="notice-title-text">2025年上半年湖北省属事业单位集中公开招聘（B类社科专技）公告</span></div><div class="notice-right"><span>2025-04-08</span><span class="arrow-icon">▼</span></div></div><div class="notice-body"><p class="detail-p">省文联各直属岗位招考，重在考查材料热点论述、去模板化的政论/社评材料撰写素养。</p><button class="action-inline-btn" onclick="openModal('咨询')">检索岗位表及专属讲义</button></div></div>
+                <div class="notice-group"><div class="notice-header" onclick="toggleNotice(this)"><div class="notice-left"><span class="notice-tag b">B类</span><span class="notice-title-text">2025年重庆市属新闻出版及广播电视机构编内招录简章</span></div><div class="notice-right"><span>2025-03-17</span><span class="arrow-icon">▼</span></div></div><div class="notice-body"><p class="detail-p">招录网络与新媒体专业。增设数字化媒体融合、短视频网络舆情案例应对大题，与时俱进。</p><button class="action-inline-btn" onclick="openModal('咨询')">检索岗位表及专属讲义</button></div></div>
             </div>
-            <div class="notice-item">
-                <div><span class="notice-tag">医疗岗</span>医学检验技术、临床医学等专科岗位报考门槛放宽通知</div>
-                <div class="notice-date">05-08</div>
-            </div>
-        </div>
 
-        <div id="tab-zh" class="notice-content">
-            <div class="notice-item">
-                <div><span class="notice-tag">综合岗</span>2026年北京市属事业单位上半年公招统考笔试大纲</div>
-                <div class="notice-date">05-15</div>
+            <div id="cat-c" class="notice-list">
+                <div class="notice-group">
+                    <div class="notice-header" onclick="toggleNotice(this)">
+                        <div class="notice-left"><span class="notice-tag c">C类</span><span class="notice-title-text">2026年中国科学院地质与地球物理研究所科研辅助岗（事业编）招聘</span></div>
+                        <div class="notice-right"><span>2026-05-12</span><span class="arrow-icon">▼</span></div>
+                    </div>
+                    <div class="notice-body">
+                        <table class="info-table">
+                            <tr><th>招录单位</th><td>国家重点实验室数据中心、技术实验保障部</td></tr>
+                            <tr><th>专业要求</th><td>地质学、地理信息系统(GIS)、计算机软件工程等</td></tr>
+                            <tr><th>笔试科目</th><td>职业能力倾向测验(C类) + 综合应用能力(C类)</td></tr>
+                        </table>
+                        <p class="detail-p">涉及大量数理策略逻辑判定、科技实验报告排查纠错题，适合理科与工科生发挥思维优势。</p>
+                        <button class="action-inline-btn" onclick="openModal('咨询中科院C类编制')">一键检索该公告岗位表</button>
+                    </div>
+                </div>
+                <div class="notice-group"><div class="notice-header" onclick="toggleNotice(this)"><div class="notice-left"><span class="notice-tag c">C类</span><span class="notice-title-text">2026年云南省生态环境厅下属监测站公开招聘编制内技术人员公告</span></div><div class="notice-right"><span>2026-04-25</span><span class="arrow-icon">▼</span></div></div><div class="notice-body"><p class="detail-p">州市环境监测中心招录环境工程、应用化学专业。考核包含物理化学实验设计及科技实务报告拟定。</p><button class="action-inline-btn" onclick="openModal('咨询')">检索岗位表及专属讲义</button></div></div>
+                <div class="notice-group"><div class="notice-header" onclick="toggleNotice(this)"><div class="notice-left"><span class="notice-tag c">C类</span><span class="notice-title-text">2026年北京市规划和自然资源委员会直属测绘研究院专技岗简章</span></div><div class="notice-right"><span>2026-03-18</span><span class="arrow-icon">▼</span></div></div><div class="notice-body"><p class="detail-p">招录城乡规划、测绘工程本科生。考察空间几何逻辑、复杂规划图表计算以及城建法规运用。</p><button class="action-inline-btn" onclick="openModal('咨询')">检索岗位表及专属讲义</button></div></div>
+                <div class="notice-group"><div class="notice-header" onclick="toggleNotice(this)"><div class="notice-left"><span class="notice-tag c">C类</span><span class="notice-title-text">2026年广东省气象局直属气象台地方气象事业编制招录公告</span></div><div class="notice-right"><span>2026-02-26</span><span class="arrow-icon">▼</span></div></div><div class="notice-body"><p class="detail-p">高技术门槛岗位。限大气科学、雷达电子工程。因为对口极窄所以竞争较小，重点在笔试必须过线。</p><button class="action-inline-btn" onclick="openModal('咨询')">检索岗位表及专属讲义</button></div></div>
+                <div class="notice-group"><div class="notice-header" onclick="toggleNotice(this)"><div class="notice-left"><span class="notice-tag c">C类</span><span class="notice-title-text">2026年国家林业和草原局直属华东勘察设计院编制专技选拔</span></div><div class="notice-right"><span>2026-01-12</span><span class="arrow-icon">▼</span></div></div><div class="notice-body"><p class="detail-p">考察森林生态学、遥感测绘基础数据处理。笔试主观题侧重林草生态资源保护的策略书写。</p><button class="action-inline-btn" onclick="openModal('咨询')">检索岗位表及专属讲义</button></div></div>
+                <div class="notice-group"><div class="notice-header" onclick="toggleNotice(this)"><div class="notice-left"><span class="notice-tag c">C类</span><span class="notice-title-text">2025年下半年深圳市生态环境监测中心高层次实验室专技招募通知</span></div><div class="notice-right"><span>2025-11-12</span><span class="arrow-icon">▼</span></div></div><div class="notice-body"><p class="detail-p">核与辐射监测中心等高薪编制岗位。面试极其侧重精密理化分析仪器操作规范与复杂盲样实验考核。</p><button class="action-inline-btn" onclick="openModal('咨询')">检索岗位表及专属讲义</button></div></div>
+                <div class="notice-group"><div class="notice-header" onclick="toggleNotice(this)"><div class="notice-left"><span class="notice-tag c">C类</span><span class="notice-title-text">2025年西安市大数据局下属信息安全中心专技岗（C类计算机）公告</span></div><div class="notice-right"><span>2025-10-09</span><span class="arrow-icon">▼</span></div></div><div class="notice-body"><p class="detail-p">招录网络安全、软件工程方向。笔试涉及算法策略排查、服务器应急响应技术报告拟定。</p><button class="action-inline-btn" onclick="openModal('咨询')">检索岗位表及专属讲义</button></div></div>
+                <div class="notice-group"><div class="notice-header" onclick="toggleNotice(this)"><div class="notice-left"><span class="notice-tag c">C类</span><span class="notice-title-text">2025年山东省自然资源厅直属地质矿产勘查局编制内招录简章</span></div><div class="notice-right"><span>2025-06-28</span><span class="arrow-icon">▼</span></div></div><div class="notice-body"><p class="detail-p">招录水文地质、资源勘查工程岗位。倾向能接受野外勘测测算的技术型人才，试卷专业性极高。</p><button class="action-inline-btn" onclick="openModal('咨询')">检索岗位表及专属讲义</button></div></div>
+                <div class="notice-group"><div class="notice-header" onclick="toggleNotice(this)"><div class="notice-left"><span class="notice-tag c">C类</span><span class="notice-title-text">2025年上半年湖北省属科研院所测试分析中心公开招聘（C类）职位表</span></div><div class="notice-right"><span>2025-04-08</span><span class="arrow-icon">▼</span></div></div><div class="notice-body"><p class="detail-p">省农科院分析化学、食品科学技术岗。重在考查科技实务题（如找出学术图表中的逻辑漏洞）。</p><button class="action-inline-btn" onclick="openModal('咨询')">检索岗位表及专属讲义</button></div></div>
+                <div class="notice-group"><div class="notice-header" onclick="toggleNotice(this)"><div class="notice-left"><span class="notice-tag c">C类</span><span class="notice-title-text">2025年大连市水务局下属水利水文勘测中心专技岗招录简章</span></div><div class="notice-right"><span>2025-03-22</span><span class="arrow-icon">▼</span></div></div><div class="notice-body"><p class="detail-p">招录水利水电、水文资源工程本科。重在考核精密水文数据计算，对容错率和提速能力有硬性要求。</p><button class="action-inline-btn" onclick="openModal('咨询')">检索岗位表及专属讲义</button></div></div>
             </div>
-            <div class="notice-item">
-                <div><span class="notice-tag">综合岗</span>A类综合管理岗位历年笔试进面分数线测算汇总</div>
-                <div class="notice-date">04-28</div>
+
+            <div id="cat-d" class="notice-list">
+                <div class="notice-group">
+                    <div class="notice-header" onclick="toggleNotice(this)">
+                        <div class="notice-left"><span class="notice-tag d">D类</span><span class="notice-title-text">2026年北京市海淀区/西城区教委所属中小学教师岗统一招聘公告</span></div>
+                        <div class="notice-right"><span>2026-05-18</span><span class="arrow-icon">▼</span></div>
+                    </div>
+                    <div class="notice-body">
+                        <table class="info-table">
+                            <tr><th>招录单位</th><td>海淀、西城各重点公办中小学、九年一贯制本部</td></tr>
+                            <tr><th>报考硬槛</th><td>本科及以上学历，必须在报名截止前持有相应学段教师资格证</td></tr>
+                            <tr><th>笔试科目</th><td>职业能力倾向测验(D类) + 综合应用能力(D类)</td></tr>
+                        </table>
+                        <p class="detail-p">主要考核教育学原理、儿童心理学基础、个性化教学设计及复杂班级管理案例分析，主观题量大。</p>
+                        <button class="action-inline-btn" onclick="openModal('获取北京教师编条件')">一键检索该公告岗位表</button>
+                    </div>
+                </div>
+                <div class="notice-group"><div class="notice-header" onclick="toggleNotice(this)"><div class="notice-left"><span class="notice-tag d">D类</span><span class="notice-title-text">2026年昆明市官渡区教委直属中小学/幼儿园教师专项编制招录</span></div><div class="notice-right"><span>2026-04-28</span><span class="arrow-icon">▼</span></div></div><div class="notice-body"><p class="detail-p">限师范类专业报考。笔试侧重学科教法、新课程标准及手写完整教案，面试含15分钟微型课说课。</p><button class="action-inline-btn" onclick="openModal('咨询')">检索岗位表及专属讲义</button></div></div>
+                <div class="notice-group"><div class="notice-header" onclick="toggleNotice(this)"><div class="notice-left"><span class="notice-tag d">D类</span><span class="notice-title-text">2026年广州市越秀区公开招聘中小学编制教师（中小学各学科）</span></div><div class="notice-right"><span>2026-03-15</span><span class="arrow-icon">▼</span></div></div><div class="notice-body"><p class="detail-p">全日制本科以上招录，主要吸纳优秀在职教师或应届。星斐淇提供1对1全真考场还原面试辅导。</p><button class="action-inline-btn" onclick="openModal('咨询')">检索岗位表及专属讲义</button></div></div>
+                <div class="notice-group"><div class="notice-header" onclick="toggleNotice(this)"><div class="notice-left"><span class="notice-tag d">D类</span><span class="notice-title-text">2026年成都市高新区中小学面向社会公开招聘员额制/编制教师通知</span></div><div class="notice-right"><span>2026-02-20</span><span class="arrow-icon">▼</span></div></div><div class="notice-body"><p class="detail-p">注重师德师风、学生心理问题预防干预以及现代家校共育冲突解决等案例题，实操性极强。</p><button class="action-inline-btn" onclick="openModal('咨询')">检索岗位表及专属讲义</button></div></div>
+                <div class="notice-group"><div class="notice-header" onclick="toggleNotice(this)"><div class="notice-left"><span class="notice-tag d">D类</span><span class="notice-title-text">2026年南京市教委直属中等职业学校、特殊教育中心专业教师招考</span></div><div class="notice-right"><span>2026-01-18</span><span class="arrow-icon">▼</span></div></div><div class="notice-body"><p class="detail-p">侧重特殊教育心理辅导或职教专业实操理论。笔试考察特教伦理学与实务教法设计。</p><button class="action-inline-btn" onclick="openModal('咨询')">检索岗位表及专属讲义</button></div></div>
+                <div class="notice-group"><div class="notice-header" onclick="toggleNotice(this)"><div class="notice-left"><span class="notice-tag d">D类</span><span class="notice-title-text">2025年下半年杭州市直属及各公办中小学教师集中招聘简章</span></div><div class="notice-right"><span>2025-10-25</span><span class="arrow-icon">▼</span></div></div><div class="notice-body"><p class="detail-p">江浙地区优质教师编制。笔试重在主观题作答，强调在职教师思维的展现，严禁教条化模板。</p><button class="action-inline-btn" onclick="openModal('咨询')">检索岗位表及专属讲义</button></div></div>
+                <div class="notice-group"><div class="notice-header" onclick="toggleNotice(this)"><div class="notice-left"><span class="notice-tag d">D类</span><span class="notice-title-text">2025年西安市曲江新区/高新区公办学校教师编制招聘职位表</span></div><div class="notice-right"><span>2025-09-12</span><span class="arrow-icon">▼</span></div></div><div class="notice-body"><p class="detail-p">采取无生试讲+即兴评课答辩的形式考核。星斐淇特聘前任明星校长团队为您全景逐字打磨说课稿。</p><button class="action-inline-btn" onclick="openModal('咨询')">检索岗位表及专属讲义</button></div></div>
+                <div class="notice-group"><div class="notice-header" onclick="toggleNotice(this).html"><div class="notice-left"><span class="notice-tag d">D类</span><span class="notice-title-text">2025年深圳市各区属公办中小学面向社会优秀社会人员选拔简章</span></div><div class="notice-right"><span>2025-06-11</span><span class="arrow-icon">▼</span></div></div><div class="notice-body"><p class="detail-p">待遇丰厚，要求极高。题型多变，侧重考查国家最新教育体制机制（如双减政策内化教学）评述大题。</p><button class="action-inline-btn" onclick="openModal('咨询')">检索岗位表及专属讲义</button></div></div>
+                <div class="notice-group"><div class="notice-header" onclick="toggleNotice(this)"><div class="notice-left"><span class="notice-tag d">D类</span><span class="notice-title-text">2025年上半年湖北省中小学教师统考（省属编制岗位）招录简章</span></div><div class="notice-right"><span>2025-04-08</span><span class="arrow-icon">▼</span></div></div><div class="notice-body"><p class="detail-p">全省全类大统考。属于在职社会考生转行公办教师编制的黄金核心通道，招录岗位基数大。</p><button class="action-inline-btn" onclick="openModal('咨询')">检索岗位表及专属讲义</button></div></div>
+                <div class="notice-group"><div class="notice-header" onclick="toggleNotice(this)"><div class="notice-left"><span class="notice-tag d">D类</span><span class="notice-title-text">2025年哈尔滨市属中小学校面向社会公开招聘编制教师简章</span></div><div class="notice-right"><span>2025-02-11</span><span class="arrow-icon">▼</span></div></div><div class="notice-body"><p class="detail-p">多考察纯记忆性教育理论知识点。适合在职利用高频背诵讲义、狂刷模块题库快速突击。</p><button class="action-inline-btn" onclick="openModal('咨询')">检索岗位表及专属讲义</button></div></div>
             </div>
+
+            <div id="cat-e" class="notice-list">
+                <div class="notice-group">
+                    <div class="notice-header" onclick="toggleNotice(this)">
+                        <div class="notice-left"><span class="notice-tag e">E类</span><span class="notice-title-text">2026年昆明市事业单位统考招聘医疗岗公告（含医学检验技术等重点岗位）</span></div>
+                        <div class="notice-right"><span>2026-05-19</span><span class="arrow-icon">▼</span></div>
+                    </div>
+                    <div class="notice-body">
+                        <table class="info-table">
+                            <tr><th>招录单位</th><td>昆明市第一人民医院、市延安医院、各区直妇幼保健院</td></tr>
+                            <tr><th>核心专业</th><td>医学检验技术、临床医学、药学、公共卫生、护理学等</td></tr>
+                            <tr><th>笔试科目</th><td>职业能力倾向测验(E类) + 综合应用能力(E类-医学检验/临床)</td></tr>
+                        </table>
+                        <p class="detail-p">涵盖大量检验科、药剂科、影像临床科室正式事业编制。重点考核基础医学、医学伦理及专业技术主观案例分析大题。</p>
+                        <button class="action-inline-btn" onclick="openModal('索取昆明医疗岗职位表')">一键检索该公告岗位表</button>
+                    </div>
+                </div>
+                <div class="notice-group"><div class="notice-header" onclick="toggleNotice(this)"><div class="notice-left"><span class="notice-tag e">E类</span><span class="notice-title-text">2026年北京市属三甲医院公开招聘编制内应届及社会在职医技人员简章</span></div><div class="notice-right"><span>2026-05-14</span><span class="arrow-icon">▼</span></div></div><div class="notice-body"><p class="detail-p">同仁医院、朝阳医院等顶级医疗单位招录。笔试极其看重临床质量控制与复杂生化检验前沿进展解析。</p><button class="action-inline-btn" onclick="openModal('咨询')">检索岗位表及专属讲义</button></div></div>
+                <div class="notice-group"><div class="notice-header" onclick="toggleNotice(this)"><div class="notice-left"><span class="notice-tag e">E类</span><span class="notice-title-text">2026年云南省疾病预防控制中心（省CDC）面向社会公开招聘公告</span></div><div class="notice-right"><span>2026-04-11</span><span class="arrow-icon">▼</span></div></div><div class="notice-body"><p class="detail-p">全额拨款事业编。限微生物检验技术、公共卫生防制专业。笔试侧重流行病学调查与毒理分析实务。</p><button class="action-inline-btn" onclick="openModal('咨询')">检索岗位表及专属讲义</button></div></div>
+                <div class="notice-group"><div class="notice-header" onclick="toggleNotice(this)"><div class="notice-left"><span class="notice-tag e">E类</span><span class="notice-title-text">2026年广州市卫生健康委员会直属医疗机构（医技药护类）公招通知</span></div><div class="notice-right"><span>2026-03-05</span><span class="arrow-icon">▼</span></div></div><div class="notice-body"><p class="detail-p">主要考察检验科日常仪器差错排查、危急值处理规范流程。星斐淇提供高频考点速记魔方讲义。</p><button class="action-inline-btn" onclick="openModal('咨询')">检索岗位表及专属讲义</button></div></div>
+                <div class="notice-group"><div class="notice-header" onclick="toggleNotice(this)"><div class="notice-left"><span class="notice-tag e">E类</span><span class="notice-title-text">2026年成都市属/区属公立医院护士及检验技术专项编制招录简章</span></div><div class="notice-right"><span>2026-02-22</span><span class="arrow-icon">▼</span></div></div><div class="notice-body"><p class="detail-p">在职合同制医护转正上岸主流通道。针对医护日常排班忙、时间碎的痛点，星斐淇定制35分钟高纯度核心课。</p><button class="action-inline-btn" onclick="openModal('咨询')">检索岗位表及专属讲义</button></div></div>
+                <div class="notice-group"><div class="notice-header" onclick="toggleNotice(this)"><div class="notice-left"><span class="notice-tag e">E类</span><span class="notice-title-text">2025年下半年北京市各区社区卫生服务中心紧缺医技岗位有编制聘用公告</span></div><div class="notice-right"><span>2025-10-15</span><span class="arrow-icon">▼</span></div></div><div class="notice-body"><p class="detail-p">限北京户口或满足政策引进者，竞争比远低于三甲医院，属于在职人员快速斩获公办编制的最优避风港。</p><button class="action-inline-btn" onclick="openModal('咨询')">检索岗位表及专属讲义</button></div></div>
+                <div class="notice-group"><div class="notice-header" onclick="toggleNotice(this)"><div class="notice-left"><span class="notice-tag e">E类</span><span class="notice-title-text">2025年红河州/大理州一院及县中医院检验科/放射科编制联考职位表</span></div><div class="notice-right"><span>2025-09-08</span><span class="arrow-icon">▼</span></div></div><div class="notice-body"><p class="detail-p">全国统考卷。重在系统性解剖学、生理学、病理学、基础检验及临床实务判断的多维灌输。</p><button class="action-inline-btn" onclick="openModal('咨询')">检索岗位表及专属讲义</button></div></div>
+                <div class="notice-group"><div class="notice-header" onclick="toggleNotice(this)"><div class="notice-left"><span class="notice-tag e">E类</span><span class="notice-title-text">2025年上海市卫生健康系统联合公开招聘（基础医技药学类）简章</span></div><div class="notice-right"><span>2025-06-18</span><span class="arrow-icon">▼</span></div></div><div class="notice-body"><p class="detail-p">全面对接高品质临床标准，笔试含有核心医学前沿英文专业词汇阅读，星斐淇具备全面针对性考前点睛。</p><button class="action-inline-btn" onclick="openModal('咨询')">检索岗位表及专属讲义</button></div></div>
+                <div class="notice-group"><div class="notice-header" onclick="toggleNotice(this)"><div class="notice-left"><span class="notice-tag e">E类</span><span class="notice-title-text">2025年上半年湖北省属医疗单位集中公开招聘三甲编制岗位公告</span></div><div class="notice-right"><span>2025-04-08</span><span class="arrow-icon">▼</span></div></div><div class="notice-body"><p class="detail-p">题目难度高。星斐淇特聘权威检验科主任组成专家级教研组，深度剖析医学综合主观大题失分重灾区。</p><button class="action-inline-btn" onclick="openModal('咨询')">检索岗位表及专属讲义</button></div></div>
+                <div class="notice-group"><div class="notice-header" onclick="toggleNotice(this)"><div class="notice-left"><span class="notice-tag e">E类</span><span class="notice-title-text">2025年杭州市属/区属卫生健康机构公开招聘医内专技职位表</span></div><div class="notice-right"><span>2025-03-12</span><span class="arrow-icon">▼</span></div></div><div class="notice-body"><p class="detail-p">偏重考察医学伦理纠纷、医患沟通话术以及检验报告突发危急值上报应急预案，面试分占比重。</p><button class="action-inline-btn" onclick="openModal('咨询')">检索岗位表及专属讲义</button></div></div>
+            </div>
+            
         </div>
     </section>
 
@@ -401,30 +501,48 @@
         </div>
         <div class="course-grid">
             <div class="course-card">
-                <span class="course-tag">公基 / 职测 / 综合写作</span>
-                <h3>【笔试】筑基全程系统精讲班</h3>
-                <p>包含A/E等多类专项。针对在职备考优化，利用碎片化时间全考点夯实。</p>
+                <div class="course-card-body">
+                    <span class="course-tag">A/B/C/D/E全类筑基</span>
+                    <h3>【笔试】系统精讲班</h3>
+                    <ul class="course-desc-list">
+                        <li>**零基础首选**：全面覆盖职测与综合应用能力全考点，拒绝过时题库，只讲考得到的知识点。</li>
+                        <li>**在职无忧**：教研团队将庞杂考点高度浓缩，平均每课精简至35分钟，完美契合在职碎片化时间。</li>
+                        <li>**班型亮点**：全面涵盖A类综合管理、E类医疗卫生等多类别专项，为不同背景考生打牢绝对的地基。</li>
+                    </ul>
+                </div>
                 <div class="course-footer">
                     <span class="price">￥1,280</span>
-                    <button class="apply-btn" onclick="openModal('购买：筑基全程系统精讲班')">立即抢报 &rarr;</button>
+                    <button class="apply-btn" onclick="openModal('购买咨询：【笔试】系统精讲班')">立即抢报 &rarr;</button>
                 </div>
             </div>
             <div class="course-card">
-                <span class="course-tag">高频真题 / 考前冲刺模考</span>
-                <h3>【笔试】刷题冲刺核心技巧班</h3>
-                <p>核心考点精讲 + 历年真题演练。传授独创“秒杀解题法”，稳步提升答题速度。</p>
+                <div class="course-card-body">
+                    <span class="course-tag">技巧突破 · 极限提速</span>
+                    <h3>【笔试】刷题冲刺班</h3>
+                    <ul class="course-desc-list">
+                        <li>**独创秒杀解题法**：针对职测数量关系、资料分析及E类案例主观题，独家传授“题干特征秒判技巧”。</li>
+                        <li>**历年真题高频演练**：100%采用近两年高频真题作为底料，教研团队深度拆解，拒绝无效题海战术。</li>
+                        <li>**模考测验排查**：内置多轮全真限时模考，精准定位各模块弱项，在有限的考场时间内稳步提升答题速度。</li>
+                    </ul>
+                </div>
                 <div class="course-footer">
                     <span class="price">￥1,980</span>
-                    <button class="apply-btn" onclick="openModal('购买：刷题冲刺核心技巧班')">立即抢报 &rarr;</button>
+                    <button class="apply-btn" onclick="openModal('购买咨询：【笔试】刷题冲刺班')">立即抢报 &rarr;</button>
                 </div>
             </div>
             <div class="course-card">
-                <span class="course-tag">结构化面试 / 1对1全真全景模拟</span>
-                <h3>【面试】翻盘名师协议通关班</h3>
-                <p>1:1全真考场还原，名师逐字打磨答题思路。高端协议保障</p>
+                <div class="course-card-body">
+                    <span class="course-tag">全景模拟 · 高端保障</span>
+                    <h3>【面试】协议翻盘班</h3>
+                    <ul class="course-desc-list">
+                        <li>**结构化与无领导深度打磨**：针对各类别考情1:1还原高压实景考场，彻底拒绝流水线模板答题。</li>
+                        <li>**专属名师逐字修正**：由具备丰富实战经验的专家团队，针对学员的站姿、微表情、答题逻辑进行逐字修正。</li>
+                        <li>**未上岸按约全退**：签署正规具备法律效力的培训协议。保障健全，面试未通过按合同约定全额退费。</li>
+                    </ul>
+                </div>
                 <div class="course-footer">
                     <span class="price">￥5,800</span>
-                    <button class="apply-btn" onclick="openModal('购买：翻盘名师协议通关班')">立即抢报 &rarr;</button>
+                    <button class="apply-btn" onclick="openModal('购买咨询：【面试】协议翻盘班')">立即抢报 &rarr;</button>
                 </div>
             </div>
         </div>
@@ -434,33 +552,37 @@
         <div class="modal-box">
             <span class="close-modal" onclick="closeModal()">&times;</span>
             <h3 id="modalTitle">免费预约报考指导</h3>
-            <form action="https://formspree.io/f/placeholder" method="POST" onsubmit="handleFormSubmit(event)">
-                <input type="hidden" id="sourceInput" name="咨询来源" value="baidu.com">
+            <p class="modal-subtitle">请留下您的基本信息，星斐淇教务老师将为您量身定制专属考编规划。</p>
+            
+            <form onsubmit="handleFormSubmit(event)">
+                <input type="hidden" id="sourceInput" value="">
                 <div class="form-group">
                     <label>考生姓名</label>
-                    <input type="text" name="姓名" placeholder="请输入您的姓名" required>
+                    <input type="text" id="username" placeholder="如何称呼您" required>
                 </div>
                 <div class="form-group">
                     <label>手机号码</label>
-                    <input type="tel" name="电话" placeholder="方便教务老师与您联系" required pattern="[0-9]{11}">
+                    <input type="tel" id="userphone" placeholder="请输入11位手机号" required pattern="[0-9]{11}">
                 </div>
                 <div class="form-group">
-                    <label>意向报考类别</label>
-                    <select name="意向类别">
-                        <option value="综合管理A类">综合管理类 (A类)</option>
-                        <option value="医疗卫生E类">医疗卫生类 (E类)</option>
-                        <option value="其他/不确定">其他类 / 尚未确定</option>
+                    <label>备考意向类别</label>
+                    <select id="userclass">
+                        <option value="综合管理A类">综合管理类 (A类 - 行政/综合岗)</option>
+                        <option value="医疗卫生E类">医疗卫生类 (E类 - 医学检验/临床等)</option>
+                        <option value="自然科学C类">自然科学专技类 (C类 - 理工技术岗)</option>
+                        <option value="社会科学B类">社会科学专技类 (B类 - 文史媒体岗)</option>
+                        <option value="中小学教师D类">中小学教师类 (D类 - 教育教学岗)</option>
                     </select>
                 </div>
-                <button type="submit" class="submit-btn">提交申请 · 老师稍后联系</button>
+                <button type="submit" class="submit-btn">确认提交 · 开启上岸第一步</button>
             </form>
         </div>
     </div>
 
     <div class="floating-contact">
-        <div class="contact-circle" title="电话咨询" onclick="alert('欢迎致电星斐淇教育官方热线：400-123-4567')">📞</div>
-        <div class="contact-circle" title="微信咨询" onclick="alert('请添加老师企业微信：CandyTto')">💬</div>
-        <div class="contact-circle" title="返回顶部" onclick="window.scrollTo({top:0, behavior:'smooth'})">▲</div>
+        <div class="contact-circle" title="电话咨询" onclick="alert('欢迎致电星斐淇教育：400-123-4567')">📞</div>
+        <div class="contact-circle" title="微信咨询" onclick="alert('请添加官方课程顾问企业微信：CandyTto')">💬</div>
+        <div class="contact-circle c-main" title="返回顶部" onclick="window.scrollTo({top:0, behavior:'smooth'})">▲</div>
     </div>
 
     <footer>
@@ -468,10 +590,10 @@
     </footer>
 
     <script>
-        // Tab 公告切换逻辑
+        // 纯原生 Tab 切换逻辑，稳定可靠
         function switchTab(event, tabId) {
-            const tabs = document.querySelectorAll('.notice-content');
-            tabs.forEach(tab => tab.classList.remove('active'));
+            const lists = document.querySelectorAll('.notice-list');
+            lists.forEach(list => list.classList.remove('active'));
             
             const buttons = document.querySelectorAll('.tab-btn');
             buttons.forEach(btn => btn.classList.remove('active'));
@@ -480,26 +602,42 @@
             event.currentTarget.classList.add('active');
         }
 
-        // 弹窗逻辑
+        // 公告折叠/展开逻辑
+        function toggleNotice(element) {
+            const group = element.parentElement;
+            const isOpen = group.classList.contains('open');
+            
+            // 点击新公告时，自动折叠其余已展开的公告
+            document.querySelectorAll('.notice-group').forEach(g => g.classList.remove('open'));
+            
+            if (!isOpen) { 
+                group.classList.add('open'); 
+            }
+        }
+
+        // 弹窗管理
         function openModal(sourceName) {
             document.getElementById('modalTitle').innerText = sourceName;
             document.getElementById('sourceInput').value = sourceName;
             document.getElementById('infoModal').classList.add('active');
         }
 
-        function closeModal() {
-            document.getElementById('infoModal').classList.remove('active');
+        function closeModal() { 
+            document.getElementById('infoModal').classList.remove('active'); 
         }
 
-        // 拦截点击弹窗外部关闭
-        document.getElementById('infoModal').addEventListener('click', function(e) {
-            if(e.target === this) closeModal();
+        document.getElementById('infoModal').addEventListener('click', function(e) { 
+            if(e.target === this) closeModal(); 
         });
 
-        // 表单模拟提交提示
+        // 表单安全提交与数据物理重置
         function handleFormSubmit(event) {
             event.preventDefault();
-            alert('🎉 申请成功！星斐淇教育的教务老师将在24小时内与您电话联系，请保持手机畅通。');
+            const name = document.getElementById('username').value;
+            alert(`🎉 提交成功！\n\n尊敬的 ${name} 同学，星斐淇教育已收到您的【${document.getElementById('sourceInput').value}】申请。教务老师将在24小时内为您进行考情诊断，祝您一战成编！`);
+            
+            // 物理重置：瞬间清空已填信息，彻底杜绝下一次开启时的留存隐患
+            event.target.reset();
             closeModal();
         }
     </script>
